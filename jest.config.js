@@ -5,6 +5,6 @@ module.exports = {
   testEnvironment: 'node',
   transform: {
     '.+\\.ts$': 'ts-jest'
-  }
-  // coverageProvider: "v8",
+  },
+  coverageProvider: 'babel'
 }
