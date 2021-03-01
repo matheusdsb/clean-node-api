@@ -1,4 +1,4 @@
-import { ValidationComposite } from '../../presentation/helpers/validators/valitadion-composite'
+import { ValidationComposite } from '../../presentation/helpers/validators/validation-composite'
 import { RequiredFieldVaildation } from '../../presentation/helpers/validators/required-field-validation'
 import { Validation } from '../../presentation/helpers/validators/validation'
 import { CompareFieldsVaildation } from '../../presentation/helpers/validators/compare-fields-validation'
