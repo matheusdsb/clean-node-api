@@ -4,8 +4,13 @@ module.exports = {
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/main/**',
     '!<rootDir>/src/data/usecases/add-account/db-add-account-protocols.ts',
-    '!<rootDir>/src/presentation/controllers/login/login-protocols.ts',
-    '!<rootDir>/src/presentation/controllers/signup/signup-protocols.ts',
+    '!<rootDir>/src/data/usecases/add-survey/db-add-survey-protocols.ts',
+    '!<rootDir>/src/data/usecases/authentication/db-authentication-protocols.ts',
+    '!<rootDir>/src/presentation/controllers/login/login/login-controller-protocols.ts',
+    '!<rootDir>/src/presentation/controllers/login/signup/signup-controller-protocols.ts',
+    '!<rootDir>/src/presentation/controllers/survey/load-surveys/load-sorvey-controller-protocols.ts',
+    '!<rootDir>/src/presentation/controllers/survey/add-survey/add-sorvey-controller-protocols.ts',
+    '!<rootDir>/src/presentation/middlewares/auth-middleware-protocols.ts',
     '!<rootDir>/src/presentation/protocols/index.ts'
   ],
   coverageDirectory: 'coverage',
@@ -14,5 +19,8 @@ module.exports = {
   transform: {
     '.+\\.ts$': 'ts-jest'
   },
-  coverageProvider: 'babel'
+  coverageProvider: 'babel',
+  moduleNameMapper: {
+    '@/(.*)': '<rootDir>/src/$1'
+  }
 }
