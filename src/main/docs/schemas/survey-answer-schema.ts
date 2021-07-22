@@ -1,11 +1,12 @@
 export const surveyAnswerSchema = {
   type: 'object',
   properties: {
-    imagem: {
+    image: {
       type: 'string'
     },
     answer: {
       type: 'string'
     }
-  }
+  },
+  required: ['answer']
 }
