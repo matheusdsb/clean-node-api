@@ -1,16 +1,14 @@
 import { LoadSurveyResultController } from './load-survey-result-controller'
-import { HttpRequest, LoadSurveyById, LoadSurveyResult } from './load-survey-result-controller-protocols'
+import { LoadSurveyById, LoadSurveyResult } from './load-survey-result-controller-protocols'
 import { mockLoadSurveyById, mockLoadSurveyResult } from '@/presentation/test/'
 import { forbidden, serverError, ok } from '@/presentation/helpers/http/http-helper'
 import { InvalidParamError } from '@/presentation/errors'
 import { throwError, mockSurveyResultModel } from '@/domain/test/'
 import MockDate from 'mockdate'
 
-const mockRequest = (): HttpRequest => ({
+const mockRequest = (): LoadSurveyResultController.Request => ({
   accountId: 'any_account_id',
-  params: {
-    surveyId: 'any_id'
-  }
+  surveyId: 'any_id'
 })
 
 type SutTypes = {
@@ -65,7 +63,7 @@ describe('LoadSurveyResult Controller', () => {
     const loadSpy = jest.spyOn(loadSurveyResultStub, 'load')
     const request = mockRequest()
     await sut.handle(request)
-    expect(loadSpy).toHaveBeenCalledWith(request.params.surveyId, request.accountId)
+    expect(loadSpy).toHaveBeenCalledWith(request.surveyId, request.accountId)
   })
 
   test('Should return 500 if LoadSurveyResult throws', async () => {
