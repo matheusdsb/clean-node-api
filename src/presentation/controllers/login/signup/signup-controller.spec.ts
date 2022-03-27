@@ -1,6 +1,6 @@
 import { SignUpController } from './signup-controller'
 import { MissingParamError, ServerError, EmailInUseError } from '@/presentation/errors'
-import { AddAccount, AccountModel, Validation, Authentication } from './signup-controller-protocols'
+import { AddAccount, Validation, Authentication } from './signup-controller-protocols'
 import { ok, serverError, badRequest, forbidden } from '@/presentation/helpers/http/http-helper'
 import { EmailValidator } from '@/validation/protocols/email-validator'
 import { throwError } from '@/domain/test'
@@ -68,7 +68,7 @@ describe('SignUp Controller', () => {
 
   test('Should return 403 if AddAccount returns null', async () => {
     const { sut, addAccountStub } = makeSut()
-    jest.spyOn(addAccountStub, 'add').mockReturnValueOnce(Promise.resolve(null as unknown as AccountModel))
+    jest.spyOn(addAccountStub, 'add').mockReturnValueOnce(Promise.resolve(false))
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
