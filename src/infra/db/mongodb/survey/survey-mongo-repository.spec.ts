@@ -99,9 +99,32 @@ describe('Survey Mongo Repository', () => {
     })
   })
 
+  describe('loadAnswers()', () => {
+    test('Should load answers on success', async () => {
+      const res = await surveyCollection.insertOne(mockAddSurveyParams())
+      const survey = res.ops[0]
+      const sut = makeSut()
+      const answers = await sut.loadAnswers(survey._id)
+      expect(answers).toEqual([survey.answers[0].answer, survey.answers[1].answer])
+    })
+
+    test('Should return empty array if survey does not exists', async () => {
+      const sut = makeSut()
+      const answers = await sut.loadAnswers(FakeObjectId.createFromTime(10).toHexString())
+      expect(answers).toEqual([])
+    })
+  })
+
   describe('checkById()', () => {
     test('Should return true if survey exists', async () => {
+      const res = await surveyCollection.insertOne(mockAddSurveyParams())
       await surveyCollection.insertOne(mockAddSurveyParams())
+      const sut = makeSut()
+      const exists = await sut.checkById(res.ops[0]._id)
+      expect(exists).toBe(true)
+    })
+
+    test('Should return false if survey does not exists', async () => {
       const sut = makeSut()
       const exists = await sut.checkById(FakeObjectId.createFromTime(10).toHexString())
       expect(exists).toBe(false)
